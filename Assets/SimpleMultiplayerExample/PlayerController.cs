@@ -5,12 +5,15 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour {
 
    
-    public float xSpeed = 150.0f;
-    public float zSpeed = 3.0f;
+    public float xSpeed = 2.0f;
+    public float zSpeed = 2.0f;
+	public Camera playerCam;
 
 
     private Transform body;
     private Transform gun;
+	private float rotationY = 0.0f;
+	private float rotationX = 0.0f;
 
 
     public override void OnStartLocalPlayer() {
@@ -20,7 +23,7 @@ public class PlayerController : NetworkBehaviour {
 
     void Start() {
         gun = transform.FindChild("Gun");
-        
+		Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -29,8 +32,11 @@ public class PlayerController : NetworkBehaviour {
 
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * xSpeed;
         var z = Input.GetAxis("Vertical") *  Time.deltaTime * zSpeed;
-        transform.Rotate(0, x, 0);
+        transform.Translate(x, 0, 0);
         transform.Translate(0, 0, z);
+		rotationX += Input.GetAxis ("Mouse X") * 5.0f;
+		rotationY += Input.GetAxis ("Mouse Y") * 5.0f;
+		transform.eulerAngles = new Vector3 (-rotationY, rotationX, 0.0f);
         if(Input.GetButton("Fire1")) {
             CmdFire();
         }
