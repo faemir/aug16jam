@@ -16,8 +16,8 @@ public class Player : MonoBehaviour {
 		float rotX = Input.GetAxis ("Mouse X");
 		float rotY = Mathf.Clamp(Input.GetAxis ("Mouse Y"), -90, 90);
 		transform.localEulerAngles = new Vector3 (-rotY, rotX, 0.0f);
-		//movement work
-		transform.Translate(Input.GetAxis ("Horizontal") * Time.deltaTime);
-		transform.Translate(Input.GetAxis ("Vertical") * Time.deltaTime);
+		//keyboard movement
+		Vector3 vecMove = new Vector3 (Input.GetAxis ("Vertical"), 0, Input.GetAxis ("Horizontal"));
+		transform.Translate(vecMove * Time.deltaTime);
 	}
 }
