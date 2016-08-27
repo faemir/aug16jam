@@ -15,7 +15,7 @@ public class EnemySpawner : NetworkBehaviour {
                 Random.Range(-8f,8f));
             var spawnRotation = Quaternion.Euler(
                 0f,
-                Random.RandomRange(0,180),
+                Random.Range(0,180),
                 0f);
 
             var enemy = (GameObject)Instantiate(enemyPrefab, spawnPosition, spawnRotation);
