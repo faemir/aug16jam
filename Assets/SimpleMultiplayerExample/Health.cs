@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class Health : NetworkBehaviour {
     public int initialHealth = 100;
-
+    public bool destroyOnDeath;
     // Sync health
     // When server tells client that currentHealth has changed, OnChangeHealth is executed
     [SyncVar(hook = "OnChangeHealth")]
@@ -13,15 +13,23 @@ public class Health : NetworkBehaviour {
     
     public RectTransform healthBar;
 
-    void Awake() {
+    private NetworkStartPosition[] spawnPoints;
+
+    void Start() {
         currentHealth = initialHealth;
+        if (isLocalPlayer) {
+            spawnPoints = FindObjectsOfType<NetworkStartPosition>();
+        }
     }
 
     [ClientRpc] // server tells client to respawn
     void RpcRespawn() {
         if (isLocalPlayer) { // player gameobject has localauthority on client
-            // move back to zero location
-            transform.position = Vector3.zero;
+            Vector3 spawnPoint = Vector3.zero;
+            if (spawnPoints != null && spawnPoints.Length > 0) {
+                spawnPoint= spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+            }
+            transform.position = spawnPoint;
         }
     }
 
@@ -29,8 +37,12 @@ public class Health : NetworkBehaviour {
         if (!isServer) return;  // server has authority over currentHealth
         currentHealth -= amount;
         if (currentHealth <= 0) {
-            currentHealth = initialHealth;
-            RpcRespawn();
+            if (destroyOnDeath) {
+                Destroy(gameObject);
+            } else {
+                currentHealth = initialHealth;
+                RpcRespawn();
+            }
         }
     }
 
