@@ -18,13 +18,9 @@ public class HUD : MonoBehaviour {
     public float lerpPosSpeed = 1.0f;
     public float lerpRotSpeed = 1.0f;
 
-    private RectTransform healthBar;
-    private RectTransform energyBar;
+    public RectTransform healthBar;
+    public RectTransform energyBar;
 
-    void Start() {
-        healthBar = transform.FindChild("Healthbar Foreground").GetComponent<RectTransform>();
-        energyBar = transform.FindChild("Boostbar Foreground").GetComponent<RectTransform>();
-    }
 
 	void FixedUpdate() {
 
