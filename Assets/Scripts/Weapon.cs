@@ -9,12 +9,14 @@ public class Weapon : MonoBehaviour {
 	public float bulletLifetime = 2.0f;
 	public float gunCooldown = 0.1f;
 	public float laserCooldown = 1.0f;
-	public gunTypes gunType = Bullet;
+	public enum gunTypes {bullet, laser};
+	public gunTypes gunType;
 	private Transform nozzle;
 	private bool cooldown;
-	private enum gunTypes {bullet, laser};
+
 	void Start() {
 		nozzle = transform.FindChild("Nozzle");
+		cooldown = false;
 	}
 
 	IEnumerator Fire() {
@@ -23,7 +25,7 @@ public class Weapon : MonoBehaviour {
 		}
 		cooldown = true;
 		switch (gunType) {
-			case gunTypes.bullet:
+		case gunTypes.bullet:
 				var bullet = (GameObject)Instantiate (
 					bulletPrefab,
 					nozzle.position,
@@ -38,15 +40,13 @@ public class Weapon : MonoBehaviour {
 			cooldown = true;
 			Vector3 fwd = nozzle.TransformDirection(Vector3.forward);
 			RaycastHit rHit;
-			Debug.DrawRay (nozzle.position, fwd, Color.magenta, 0.2f);
+			Debug.DrawRay (nozzle.position, fwd, Color.magenta, 2.0f);
 			if (Physics.Raycast (nozzle.position, fwd, out rHit, 100.0f)) {
-				if (rHit.collider.tag == "pawn") {
 					var hit = rHit.transform.gameObject;
 					var health = hit.GetComponent<Health>();
 					if (health) {
-						health.TakeDamage(10);
+						health.TakeDamage(50);
 					}
-				}
 			}
 			yield return new WaitForSeconds (laserCooldown);
 			cooldown = false;
