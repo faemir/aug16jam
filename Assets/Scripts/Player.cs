@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	float userSpeed = 100.f;
+	float userSpeed = 100.0f;
 	Vector3 MousePos;
 
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class Player : MonoBehaviour {
 		float rotY = Mathf.Clamp(Input.GetAxis ("Mouse Y"), -90, 90);
 		transform.localEulerAngles = new Vector3 (-rotY, rotX, 0.0f);
 
-		if (readKbd() != 0) {
+		if (readKbd() != new Vector3 (0, 0, 0)) {
 			transform.Translate(readKbd() * Time.deltaTime);
 			transform.Translate(readKbd() * Time.deltaTime);
 		}
