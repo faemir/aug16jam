@@ -150,7 +150,6 @@ GameObject:
   - 20: {fileID: 232438970}
   - 92: {fileID: 232438969}
   - 124: {fileID: 232438968}
-  - 81: {fileID: 232438967}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -158,13 +157,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &232438967
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 232438966}
-  m_Enabled: 1
 --- !u!124 &232438968
 Behaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +254,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 453146, guid: 410b5de8a6fad3b4491308f2a1c87efa, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2315806, guid: 410b5de8a6fad3b4491308f2a1c87efa, type: 2}
       propertyPath: m_ReceiveShadows
@@ -411,7 +403,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 418172, guid: 01538f1c3c3e04848889987a7bca8e63, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 418172, guid: 01538f1c3c3e04848889987a7bca8e63, type: 2}
       propertyPath: m_LocalScale.x
@@ -427,48 +419,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01538f1c3c3e04848889987a7bca8e63, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &828184544
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 480122, guid: aed921ccd7a51cd47bcf557c266c33fa, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 480122, guid: aed921ccd7a51cd47bcf557c266c33fa, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 480122, guid: aed921ccd7a51cd47bcf557c266c33fa, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 480122, guid: aed921ccd7a51cd47bcf557c266c33fa, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 480122, guid: aed921ccd7a51cd47bcf557c266c33fa, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 480122, guid: aed921ccd7a51cd47bcf557c266c33fa, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 480122, guid: aed921ccd7a51cd47bcf557c266c33fa, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 480122, guid: aed921ccd7a51cd47bcf557c266c33fa, type: 2}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: aed921ccd7a51cd47bcf557c266c33fa, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1342027957
 Prefab:
@@ -507,7 +457,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 418466, guid: 836770c02ea056347a2033b490fe4f0d, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 418466, guid: 836770c02ea056347a2033b490fe4f0d, type: 2}
       propertyPath: m_LocalScale.x
@@ -561,7 +511,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 464850, guid: 86b89a221c2ed114e9c6fc72eec935db, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86b89a221c2ed114e9c6fc72eec935db, type: 2}
@@ -603,7 +553,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411794, guid: 718940f807eb53f4aa0c16d70080432d, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 411794, guid: 718940f807eb53f4aa0c16d70080432d, type: 2}
       propertyPath: m_LocalScale.x
@@ -620,3 +570,64 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 718940f807eb53f4aa0c16d70080432d, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1754730392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1754730395}
+  - 114: {fileID: 1754730394}
+  - 114: {fileID: 1754730393}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1754730393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1754730392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1754730394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1754730392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &1754730395
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1754730392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5

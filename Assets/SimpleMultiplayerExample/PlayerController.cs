@@ -7,10 +7,12 @@ public class PlayerController : NetworkBehaviour {
    
     public float moveSpeed = 2.0f;
     public float rotateSpeed = 5.0f;
-
+    public GameObject HudPrefab;
     private Transform body;
     private Transform head;
+    private Transform hudAnchor;
     private GameObject weapon;
+    private GameObject hud;
 	private float rotationY = 0.0f;
 	private float rotationX = 0.0f;
     private Vector3 movementCommand;
@@ -18,13 +20,16 @@ public class PlayerController : NetworkBehaviour {
 
     void Start() {
         head = transform.FindChild("Head");
+        hudAnchor = transform.FindChild("HUD Anchor");
         // TODO(MDB): Make weapons droppable and equippable
         weapon = head.transform.FindChild("Gun").gameObject;
 		Cursor.visible = false;
         if (isLocalPlayer) {
             body = transform.FindChild("Body");
-            body.GetComponent<MeshRenderer>().material.color = Color.blue;
+            body.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
             head.FindChild("Camera").gameObject.SetActive(true);
+            hud = (GameObject)Instantiate(HudPrefab);
+            hud.GetComponent<HUD>().parent = hudAnchor.transform;
         }
     }
 
@@ -33,8 +38,13 @@ public class PlayerController : NetworkBehaviour {
         if (!isLocalPlayer) return; // only update on local client (object owner)
 
         var x = Input.GetAxis("Horizontal") * Time.deltaTime;
-        var z = Input.GetAxis("Vertical") *  Time.deltaTime;
-        movementCommand = (transform.forward * z + transform.right * x).normalized * moveSpeed;
+        var y = Input.GetAxis("Vertical") * Time.deltaTime;
+        var z = Input.GetAxis("Forward") * Time.deltaTime;
+        movementCommand = (
+            transform.right * x +
+            transform.up * y +
+            transform.forward * z
+            ).normalized * moveSpeed;
 		rotationX += Input.GetAxis ("Mouse X") * rotateSpeed;
 		rotationY += Input.GetAxis ("Mouse Y") * rotateSpeed;
         transform.eulerAngles = new Vector3 (-rotationY, rotationX, 0.0f);
