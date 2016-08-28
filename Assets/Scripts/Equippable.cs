@@ -9,57 +9,74 @@ public class Equippable : NetworkBehaviour {
     public Vector3 equippedLocalRotation;
     public bool equipped {
         get {
-            return _equipped;
+            return _owner != null;
         }
     }
 
-    [SyncVar]
-    private bool _equipped;
     private PlayerController _owner;
     private Collider _trigger;
     private ParticleSystem _particles;
-    
+
+    [SyncVar(hook = "OnChangeOwnerId")]
+    private NetworkInstanceId _ownerId;
 
     public void Awake() {
         _trigger = GetComponent<Collider>();
         _particles = GetComponent<ParticleSystem>();
+        _ownerId = netId;
     }
 
     // Server authority
-    [Command]
-    public void CmdEquip(NetworkInstanceId parentId) {
-        if (_equipped) return;
-        _equipped = true;
-        RpcEquip(parentId);
+    void OnTriggerEnter(Collider collider) {
+        if (equipped) return;
+        if (!isServer) return;
+        PlayerController player = collider.GetComponent<PlayerController>();
+        if (player && !player.equippedItem) {
+            _ownerId = player.netId;
+        }
     }
+
+    void OnChangeOwnerId(NetworkInstanceId ownerId) {
+        // Equipped
+        if (_owner == null) {
+            _owner = ClientScene.FindLocalObject(ownerId).GetComponent<PlayerController>();
+            if (!_owner) {
+                Debug.LogError("Could not get PlayerController for equipment owner.");
+            }
+            if (isServer) {
+                GetComponent<NetworkIdentity>().AssignClientAuthority(_owner.connectionToClient);
+            }
+            _owner.equippedItem = this;
+            transform.parent = _owner.transform;
+            transform.localPosition = equippedLocalPosition;
+            transform.localRotation = Quaternion.Euler(equippedLocalRotation);
+            _particles.Stop();
+            _trigger.enabled = false;
+            Debug.Log("Equipped");
+            
+        } else {
+            if (isServer) {
+                GetComponent<NetworkIdentity>().RemoveClientAuthority(_owner.connectionToClient);
+            }
+            _owner.equippedItem = null;
+            _owner = null;
+            transform.parent = null;
+            Debug.Log("Dropped");
+            StartCoroutine(Drop());
+        }
+    }
+
+    // Command to server from owner client
     [Command]
     public void CmdDrop() {
-        _equipped = false;
-        RpcDrop();
+        _ownerId = netId;
     }
 
-    [ClientRpc]
-    void RpcEquip(NetworkInstanceId parentId) {
-        _owner = ClientScene.FindLocalObject(parentId).GetComponent<PlayerController>();
-        transform.parent = _owner.transform;
-        _owner.equippedItem = this;
-        transform.localPosition = equippedLocalPosition;
-        transform.localRotation = Quaternion.Euler(equippedLocalRotation);
-        _trigger.enabled = false;
-        _particles.Stop();
-    }
-
-    [ClientRpc]
-    void RpcDrop() {
-        StartCoroutine(Drop());
-    }
-  
     IEnumerator Drop() {
-        transform.parent = null;
-        _owner.equippedItem = null;
-        _owner = null;
         yield return new WaitForSeconds(1.0f);
         _trigger.enabled = true;
         _particles.Play();
+        Debug.Log("Ready to pickup");
     }
+
 }

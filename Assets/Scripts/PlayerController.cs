@@ -77,8 +77,10 @@ public class PlayerController : NetworkBehaviour {
         }
         // Drop item TODO(MDB): Change to InputGetButton
         if(Input.GetKeyDown(KeyCode.G)) {
-            equippedItem.CmdDrop();
-            equippedItem = null;
+            if (equippedItem) {
+                equippedItem.CmdDrop();
+                equippedItem = null;
+            }
         }
 
         // Try to start boosting
@@ -133,12 +135,5 @@ public class PlayerController : NetworkBehaviour {
         }
     }
 
-    // Trigger message
-    void OnTriggerEnter(Collider collider) {
-        // Try to equip item if possible
-        Equippable equipment = collider.GetComponent<Equippable>();
-        if (!equippedItem && equipment && !equipment.equipped) {
-            equipment.CmdEquip(netId);
-        }
-    }
+
 } 
