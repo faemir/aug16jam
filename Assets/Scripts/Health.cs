@@ -7,8 +7,8 @@ public class Health : NetworkBehaviour {
     public int initialHealth = 100;
     public bool destroyOnDeath;
     // Sync health
-    // When server tells client that currentHealth has changed, OnChangeHealth is executed
-    [SyncVar(hook = "OnChangeHealth")]
+    // When server tells client that currentHealth has changed, OnChangeHealthSync is executed
+    [SyncVar(hook = "OnChangeHealthSync")]
     public int currentHealth;
     
     public RectTransform healthBar;
@@ -46,8 +46,9 @@ public class Health : NetworkBehaviour {
         }
     }
 
-    void OnChangeHealth(int currentHealth) {
+    void OnChangeHealthSync(int currentHealth) {
         healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+        SendMessage("OnChangeHealth", currentHealth);
     }
 
 

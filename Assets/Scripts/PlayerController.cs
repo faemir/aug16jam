@@ -30,6 +30,8 @@ public class PlayerController : NetworkBehaviour {
             head.FindChild("Camera").gameObject.SetActive(true);
             hud = (GameObject)Instantiate(HudPrefab);
             hud.GetComponent<HUD>().parent = hudAnchor.transform;
+        } else {
+            head.FindChild("Camera").gameObject.SetActive(false);
         }
     }
 
@@ -61,5 +63,12 @@ public class PlayerController : NetworkBehaviour {
     [Command]
     void CmdFire() {
         weapon.SendMessage("Fire");
+    }
+
+    void OnChangeHealth(int currentHealth) {
+        if (hud) {
+            Debug.Log("Update health: " + currentHealth.ToString());
+            hud.GetComponent<HUD>().OnChangeHealth(currentHealth);
+        }
     }
 }
