@@ -13,8 +13,10 @@ public class HUD : MonoBehaviour {
     // lerp HUD to a parent position to create a lag effect when the camera moves
     // do this in FixedUpdate because player movement is controlled on FixedUpdate
 	void FixedUpdate() {
-        transform.position = Vector3.Lerp(transform.position, parent.position, Time.deltaTime * lerpPosSpeed);
-        transform.rotation = Quaternion.Lerp(transform.rotation, parent.rotation, Time.deltaTime * lerpRotSpeed);
+        if (!parent) return;
+        transform.position = parent.position;
+        transform.rotation = Quaternion.Lerp(
+            transform.rotation, parent.rotation, Time.fixedDeltaTime * lerpRotSpeed);
     }
 
     public void OnChangeHealth(int currentHealth) {

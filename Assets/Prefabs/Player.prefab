@@ -480,8 +480,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da23be478e283854fb87d559a8048019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 25
+  cruiseSpeed: 20
   rotateSpeed: 5
+  boost:
+    maxFuel: 2
+    speed: 50
+    cooldown: 1
+    rechargeRate: 1
   HudPrefab: {fileID: 185688, guid: 922235b6b029d3c439630e5b95789666, type: 2}
 --- !u!114 &11420066
 MonoBehaviour:
@@ -537,8 +542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 130824, guid: f58ae4a8b2d4a2642b5f68e60c274db8, type: 2}
-  bulletSpeed: 30
-  bulletLifetime: 2
+  bulletSpeed: 60
+  bulletLifetime: 5
   gunCooldown: 0.15
 --- !u!114 &11429148
 MonoBehaviour:
