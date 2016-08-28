@@ -22,8 +22,6 @@ public class PlayerController : NetworkBehaviour {
         }
     }
 
-    
-
     public float cruiseSpeed = 500.0f;
     public float rotateSpeed = 5.0f;
     public BoostControl boost = new BoostControl();
@@ -31,19 +29,17 @@ public class PlayerController : NetworkBehaviour {
     private Transform body;
     private Transform head;
     private Transform hudAnchor;
-    private GameObject weapon;
+    public Equippable equippedItem { get; set; }
     private GameObject hud;
-	private float rotationY = 0.0f;
-	private float rotationX = 0.0f;
+    private float rotationY = 0.0f;
+    private float rotationX = 0.0f;
     private Vector3 movementCommand;
 
 
     void Start() {
         head = transform.FindChild("Head");
         hudAnchor = transform.FindChild("HUD Anchor");
-        // TODO(MDB): Make weapons droppable and equippable
-        weapon = head.transform.FindChild("Gun").gameObject;
-		Cursor.visible = false;
+        Cursor.visible = false;
         if (isLocalPlayer) {
             body = transform.FindChild("Body");
             body.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
@@ -71,13 +67,18 @@ public class PlayerController : NetworkBehaviour {
             ).normalized;
 
         // player rotation
-		rotationX += Input.GetAxis ("Mouse X") * rotateSpeed;
-		rotationY += Input.GetAxis ("Mouse Y") * rotateSpeed;
+        rotationX += Input.GetAxis ("Mouse X") * rotateSpeed;
+        rotationY += Input.GetAxis ("Mouse Y") * rotateSpeed;
         transform.eulerAngles = new Vector3 (-rotationY, rotationX, 0.0f);
 
         // Send the fire command to server
         if(Input.GetButton("Fire1")) {
             CmdFire();
+        }
+        // Drop item TODO(MDB): Change to InputGetButton
+        if(Input.GetKeyDown(KeyCode.G)) {
+            equippedItem.CmdDrop();
+            equippedItem = null;
         }
 
         // Try to start boosting
@@ -120,12 +121,24 @@ public class PlayerController : NetworkBehaviour {
     // Execute on server
     [Command]
     void CmdFire() {
-        weapon.SendMessage("Fire");
+        if (equippedItem) {
+            equippedItem.SendMessage("Fire");
+        }
     }
 
+    // Health change message
     void OnChangeHealth(int currentHealth) {
         if (hud) {
             hud.GetComponent<HUD>().OnChangeHealth(currentHealth);
         }
     }
-}
+
+    // Trigger message
+    void OnTriggerEnter(Collider collider) {
+        // Try to equip item if possible
+        Equippable equipment = collider.GetComponent<Equippable>();
+        if (!equippedItem && equipment && !equipment.equipped) {
+            equipment.CmdEquip(netId);
+        }
+    }
+} 
