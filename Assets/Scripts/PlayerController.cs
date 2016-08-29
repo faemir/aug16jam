@@ -27,7 +27,7 @@ public class PlayerController : NetworkBehaviour {
     public BoostControl boost = new BoostControl();
     public GameObject HudPrefab;
     private Transform body;
-    private Transform head;
+    private Transform cameraAnchor;
     private Transform hudAnchor;
     public Equippable equippedItem { get; set; }
     private GameObject hud;
@@ -37,17 +37,17 @@ public class PlayerController : NetworkBehaviour {
 
 
     void Start() {
-        head = transform.FindChild("Head");
+        cameraAnchor = transform.FindChild("Camera Anchor");
         hudAnchor = transform.FindChild("HUD Anchor");
         Cursor.visible = false;
         if (isLocalPlayer) {
             body = transform.FindChild("Body");
             body.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
-            head.FindChild("Camera").gameObject.SetActive(true);
+            Camera.main.GetComponent<CameraController>().anchor = cameraAnchor;
             hud = (GameObject)Instantiate(HudPrefab);
             hud.GetComponent<HUD>().parent = hudAnchor.transform;
         } else {
-            head.FindChild("Camera").gameObject.SetActive(false);
+            
         }
         boost.fuel = boost.maxFuel;
     }
@@ -135,5 +135,10 @@ public class PlayerController : NetworkBehaviour {
         }
     }
 
-
+    void OnRespawn() {
+        if (equippedItem) {
+            equippedItem.CmdDrop();
+            equippedItem = null;
+        }
+    }
 } 
