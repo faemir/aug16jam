@@ -25,13 +25,12 @@ GameObject:
   - 4: {fileID: 473558}
   - 33: {fileID: 3360710}
   - 23: {fileID: 2356288}
-  - 114: {fileID: 11466532}
-  - 120: {fileID: 12040130}
   - 114: {fileID: 11440850}
   - 114: {fileID: 11455564}
   - 199: {fileID: 19934080}
   - 198: {fileID: 19800784}
   - 135: {fileID: 13519204}
+  - 114: {fileID: 11490164}
   m_Layer: 0
   m_Name: weaponlaser
   m_TagString: Untagged
@@ -142,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equippedLocalPosition: {x: 0, y: -0.222, z: 1.133}
   equippedLocalRotation: {x: 90, y: 0, z: 0}
---- !u!114 &11466532
+--- !u!114 &11490164
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -150,50 +149,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 140126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70e7662af7f4b974887b2be8aa4da187, type: 3}
+  m_Script: {fileID: 11500000, guid: 212393381e6a26743ad8c092c9aba12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserCooldown: 1
-  LaserLR: {fileID: 12040130}
---- !u!120 &12040130
-LineRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140126}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    startWidth: 1
-    endWidth: 1
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4294967295
-  m_UseWorldSpace: 1
+  projectilePrefab: {fileID: 152800, guid: e6fb541c02d1d1b44bc1928f49b4e3c9, type: 2}
+  networkSpawnProjectile: 0
+  rateOfFire: 3
+  maxRaycastRange: 1000
+  equipTime: 0.5
 --- !u!135 &13519204
 SphereCollider:
   m_ObjectHideFlags: 1

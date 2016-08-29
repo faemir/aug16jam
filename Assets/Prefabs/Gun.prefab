@@ -152,10 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212393381e6a26743ad8c092c9aba12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 130824, guid: f58ae4a8b2d4a2642b5f68e60c274db8, type: 2}
-  bulletSpeed: 120
-  bulletLifetime: 10
-  gunCooldown: 0.05
+  projectilePrefab: {fileID: 130824, guid: f58ae4a8b2d4a2642b5f68e60c274db8, type: 2}
+  networkSpawnProjectile: 1
+  rateOfFire: 15
+  maxRaycastRange: 1000
+  equipTime: 0.1
 --- !u!135 &13555018
 SphereCollider:
   m_ObjectHideFlags: 1

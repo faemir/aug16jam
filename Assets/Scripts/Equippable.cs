@@ -52,17 +52,17 @@ public class Equippable : NetworkBehaviour {
             transform.localRotation = Quaternion.Euler(equippedLocalRotation);
             _particles.Stop();
             _trigger.enabled = false;
-            Debug.Log("Equipped");
-            
+            SendMessage("OnEquip", SendMessageOptions.DontRequireReceiver);
         } else {
+        // Dropped
             if (isServer) {
                 GetComponent<NetworkIdentity>().RemoveClientAuthority(_owner.connectionToClient);
             }
             _owner.equippedItem = null;
             _owner = null;
             transform.parent = null;
-            Debug.Log("Dropped");
             StartCoroutine(Drop());
+            SendMessage("OnDrop", SendMessageOptions.DontRequireReceiver);
         }
     }
 
@@ -76,7 +76,6 @@ public class Equippable : NetworkBehaviour {
         yield return new WaitForSeconds(1.0f);
         _trigger.enabled = true;
         _particles.Play();
-        Debug.Log("Ready to pickup");
     }
 
 }
