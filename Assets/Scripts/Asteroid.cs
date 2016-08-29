@@ -15,9 +15,9 @@ public class Asteroid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		xSpin = Random.Range (10, 50);
-		ySpin = Random.Range (10, 50);
-		zSpin = Random.Range (10, 50);
+		xSpin = Random.Range (0.0f, 0.2f);
+		ySpin = Random.Range (0.0f, 0.2f);
+		zSpin = Random.Range (0.0f, 0.2f);
 		transform.Rotate (xSpin, ySpin, zSpin);
 	}
 }
