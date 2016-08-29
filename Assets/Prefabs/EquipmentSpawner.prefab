@@ -41,8 +41,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipment:
-  - {fileID: 135862, guid: 63ea29a929cc97840b05380f2f4ce4be, type: 2}
   - {fileID: 140126, guid: 819d05580fa867f42bb7787b8f3e1743, type: 2}
+  - {fileID: 135862, guid: 63ea29a929cc97840b05380f2f4ce4be, type: 2}
 --- !u!114 &11470212
 MonoBehaviour:
   m_ObjectHideFlags: 1
