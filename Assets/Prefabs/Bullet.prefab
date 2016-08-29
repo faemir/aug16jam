@@ -8,14 +8,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 485724}
+  - 114: {fileID: 11414970}
+  - 96: {fileID: 9694900}
   - 33: {fileID: 3343728}
   - 135: {fileID: 13566956}
   - 23: {fileID: 2308300}
   - 54: {fileID: 5431844}
   - 114: {fileID: 11457356}
   - 114: {fileID: 11449948}
-  - 114: {fileID: 11414970}
-  - 96: {fileID: 9694900}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -142,6 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactEffectPrefab: {fileID: 193158, guid: 770b2329e6bbcfa40b42344678e83878, type: 2}
+  damage: 10
+  speed: 60
+  lifetime: 10
 --- !u!114 &11449948
 MonoBehaviour:
   m_ObjectHideFlags: 1
