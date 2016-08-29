@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a7281bf199e3241a24ce9c40f15f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equippedLocalPosition: {x: 0.54, y: 1.217, z: 0.06}
+  equippedLocalPosition: {x: 0, y: -0.222, z: 1.133}
   equippedLocalRotation: {x: 90, y: 0, z: 0}
 --- !u!114 &11466532
 MonoBehaviour:
